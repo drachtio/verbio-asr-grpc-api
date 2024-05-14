@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package tts_grpc_gateway.v1;
+
+service TextToSpeech
+{
+  rpc ListVoices(ListVoicesRequest) returns (ListVoicesResponse) {}
+  rpc SynthesizeSpeech(SynthesisRequest) returns (SynthesisResponse) {}
+}
+
+message ListVoicesRequest
+{
+  optional string language = 1;
+}
+
+message ListVoicesResponse
+{
+  repeated string voices = 1;
+}
+
+message SynthesisRequest
+{
+  string text = 1;
+  string voice = 2;
+  VoiceSamplingRate sampling_rate = 3;
+  AudioFormat format = 4;
+}
+
+message SynthesisResponse
+{
+  bytes audio_samples = 1;
+}
+
+enum AudioFormat {
+  AUDIO_FORMAT_WAV_LPCM_S16LE = 0; // Linear Pulse-Code Modulation with signed 16 bit samples, little endian byte order, with a WAV header.
+  AUDIO_FORMAT_RAW_LPCM_S16LE = 1; // Linear Pulse-Code Modulation with signed 16 bit samples, little endian byte order, without any header.
+}
+
+enum VoiceSamplingRate {
+  VOICE_SAMPLING_RATE_8KHZ  = 0; // Voice sampling rate is 8 kHz.
+  VOICE_SAMPLING_RATE_16KHZ = 1; // Voice sampling rate is 16 kHz.
+}
