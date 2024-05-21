@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package speechcenter.recognizer.v1;
 
-import "recognition_streaming_request.proto";
-import "recognition_streaming_response.proto";
+import "speechcenter/recognizer/v1/recognition_streaming_request.proto";
+import "speechcenter/recognizer/v1/recognition_streaming_response.proto";
 
 // Service that implements Recognition API.
 service Recognizer {
